@@ -1,5 +1,6 @@
-﻿using System.IdentityModel.Tokens;
+﻿using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json.Linq;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace KeycloakIdentityModel.Extensions
 {

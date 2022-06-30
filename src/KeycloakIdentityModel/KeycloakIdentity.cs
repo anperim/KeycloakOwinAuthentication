@@ -1,6 +1,14 @@
-﻿using System;
+﻿using KeycloakIdentityModel.Extensions;
+using KeycloakIdentityModel.Models.Configuration;
+using KeycloakIdentityModel.Models.Messages;
+using KeycloakIdentityModel.Models.Responses;
+using KeycloakIdentityModel.Utilities;
+using KeycloakIdentityModel.Utilities.ClaimMapping;
+using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
-using System.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Security;
@@ -8,13 +16,6 @@ using System.Security.Claims;
 using System.Security.Principal;
 using System.Threading;
 using System.Threading.Tasks;
-using KeycloakIdentityModel.Extensions;
-using KeycloakIdentityModel.Models.Configuration;
-using KeycloakIdentityModel.Models.Messages;
-using KeycloakIdentityModel.Models.Responses;
-using KeycloakIdentityModel.Utilities;
-using KeycloakIdentityModel.Utilities.ClaimMapping;
-using Newtonsoft.Json.Linq;
 
 namespace KeycloakIdentityModel
 {

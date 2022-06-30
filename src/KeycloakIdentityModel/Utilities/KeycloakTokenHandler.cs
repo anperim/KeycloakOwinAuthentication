@@ -1,11 +1,11 @@
-﻿using System;
+﻿using KeycloakIdentityModel.Models.Configuration;
+using Microsoft.IdentityModel.Tokens;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
 using System.Net.Http;
 using System.Threading.Tasks;
-using KeycloakIdentityModel.Models.Configuration;
-using Microsoft.IdentityModel;
 
 namespace KeycloakIdentityModel.Utilities
 {
@@ -67,7 +67,7 @@ namespace KeycloakIdentityModel.Utilities
                 ValidIssuer = uriManager.GetIssuer(),
                 ClockSkew = options.TokenClockSkew,
                 ValidAudiences = new List<string> {"null", options.ClientId},
-                IssuerSigningTokens = uriManager.GetJsonWebKeys().GetSigningTokens(),
+                //IssuerSigningTokens = uriManager.GetJsonWebKeys().GetSigningTokens(),
                 AuthenticationType = options.AuthenticationType // Not used
             };
 
@@ -107,7 +107,7 @@ namespace KeycloakIdentityModel.Utilities
 
             if (securityToken.Length > MaximumTokenSizeInBytes)
             {
-                throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, ErrorMessages.IDX10209,
+                throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, "MaximumTokenSizeInBytes",
                     securityToken.Length, MaximumTokenSizeInBytes));
             }
 
@@ -138,7 +138,7 @@ namespace KeycloakIdentityModel.Utilities
                     if (!validationParameters.LifetimeValidator(notBefore, expires, jwt, validationParameters))
                     {
                         throw new SecurityTokenInvalidLifetimeException(string.Format(CultureInfo.InvariantCulture,
-                            ErrorMessages.IDX10230, jwt));
+                            "SecurityTokenInvalidLifetimeException", jwt));
                     }
                 }
                 else
@@ -154,7 +154,7 @@ namespace KeycloakIdentityModel.Utilities
                     if (!validationParameters.AudienceValidator(jwt.Audiences, jwt, validationParameters))
                     {
                         throw new SecurityTokenInvalidAudienceException(string.Format(CultureInfo.InvariantCulture,
-                            ErrorMessages.IDX10231, jwt));
+                            "SecurityTokenInvalidAudienceException", jwt));
                     }
                 }
                 else
